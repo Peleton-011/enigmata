@@ -155,7 +155,7 @@ export function generateBattleshipBoard(attempts?: number): Puzzle {
 	} catch (error) {
 		console.error(error);
 		console.log("Generating puzzle failed, trying again");
-		return generateSolvedBoard(attempts ? attempts + 1 : 1);
+		return generateBattleshipBoard(attempts ? attempts + 1 : 1);
 	}
 	return generateSolvedBoard();
 	return generatePuzzleFromSolution(generateSolvedBoard(), 0);
@@ -206,7 +206,7 @@ function isShipHint(hint?: HintType): boolean {
 	);
 }
 
-function generatePuzzleFromSolution(
+export function generatePuzzleFromSolution(
 	solution: Puzzle,
 	difficultySteps: number
 ): Puzzle {
