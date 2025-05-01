@@ -1,13 +1,15 @@
-<template>
-  <div>
-    
-  </div>
-</template>
-
-<script lang="ts" setup>
-
+<script setup lang="ts">
+import BoardDisplay from "~/components/puzzles/battleship/BoardDisplay.vue";
 </script>
 
-<style>
+<template>
+	<UCard>
+		<template #header>
+			<h2 class="text-xl font-semibold">Battleship Board</h2>
+		</template>
 
-</style>
+		<ClientOnly>
+			<BoardDisplay :puzzle="usePuzzleGenerator('battleship')" />
+		</ClientOnly>
+	</UCard>
+</template>
