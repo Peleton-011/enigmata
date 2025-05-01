@@ -1,38 +1,42 @@
 <script setup lang="ts">
 const route = useRoute();
-const puzzleSlug = (route.params.slug as String);
+const slug = route.params.slug as string;
 
-// You might fetch puzzle metadata here later
+const PuzzleIntro = usePuzzleComponent(slug, "PuzzleIntro");
+const SampleBoard = usePuzzleComponent(slug, "SampleBoard");
+
 </script>
 
 <template>
 	<div class="space-y-8">
 		<UCard>
 			<template #header>
-				<h1 class="text-2xl font-bold capitalize">{{ puzzleSlug }}</h1>
+				<h1 class="text-2xl font-bold capitalize">{{ slug }}</h1>
 			</template>
-			<p>
-				Welcome to {{ puzzleSlug }}! Learn how it works, try a sample,
-				and solve your first puzzle.
-			</p>
+			<component :is="PuzzleIntro" v-if="PuzzleIntro" />
+			<p v-else>No intro available, yet.</p>
 		</UCard>
 
 		<UCard>
 			<template #header>
-				<h2 class="text-xl font-semibold">Sample Puzzle</h2>
+				<h2 class="text-xl font-semibold">Try a Sample</h2>
 			</template>
-			<p>TODO: Render sample puzzle component</p>
+			<component :is="SampleBoard" v-if="SampleBoard" />
+			<p v-else>No sample available, yet.</p>
 		</UCard>
 
 		<div class="flex gap-4">
 			<UButton
-				to="./catalogue"
+				:to="`/games/${slug}/catalogue`"
 				icon="i-heroicons-book-open"
 				variant="soft"
-				>Curated Catalogue</UButton
+				>Catalogue</UButton
 			>
-			<UButton to="./generator" icon="i-heroicons-sparkles" variant="soft"
-				>Puzzle Generator</UButton
+			<UButton
+				:to="`/games/${slug}/generator`"
+				icon="i-heroicons-sparkles"
+				variant="soft"
+				>Generator</UButton
 			>
 		</div>
 	</div>
