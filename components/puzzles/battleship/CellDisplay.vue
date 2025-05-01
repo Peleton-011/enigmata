@@ -6,6 +6,7 @@
 			'bg-gray-700 text-white': isShipPart || cell.hint?.type === 'submarine',
 		}"
 	>
+    <span v-if="cell.content === 'water'">~</span>
 		<!-- Optional hint characters -->
 		<template v-if="cell.hint" >
 			<span v-if="cell.hint.type === 'shipEnd'">
